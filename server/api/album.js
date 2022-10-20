@@ -3,7 +3,16 @@ const { Album, Song, Artist } = require("../db/models");
 
 router.get("/", async (req, res, next) => {
   try {
-    const allAlbums = await Album.findAll({});
+    const allAlbums = await Album.findAll({
+      include: [
+        {
+          model: Artist,
+        },
+        {
+          model: Song,
+        },
+      ],
+    });
     res.send(allAlbums);
   } catch (error) {
     next(error);
