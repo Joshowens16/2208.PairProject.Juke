@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const AllAlbums = (props) => {
 
-    const getAlbum = (x) => {
-        const selected = props.albums[x-1]
+    const getAlbum = (album) => {
+        const selected = album
         props.setSelectedAlbum(selected)
-        console.log(props.selectedAlbum)
-   
     }
     return (
         <div id='albums' className='row wrap'>
             {props.albums.map((album)=> {
             return (<div className='album' key={album.id} >
-                <a onClick={getAlbum(album.id)}>
-                <img src={album.artworkUrl} />
+                <a>
+                    <Link to={`/albums/${album.id}`} onClick={()=> {getAlbum(album.id)}} > 
+                    <img src={album.artworkUrl} />
+                    </Link>
+
                 <p>{album.name}</p>
                 <small>{album.artist.name}</small>
                 </a>
